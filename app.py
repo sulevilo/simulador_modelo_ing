@@ -7,7 +7,7 @@ import altair as alt
 # CONFIGURACIÓN GENERAL
 # -------------------------------------------------
 st.set_page_config(page_title="Simulador de Inventario Avanzado", layout="wide")
-st.title("🛠️ Simulador Interactivo de Inventario – Política (s, Q)")
+st.title("Simulador Interactivo de Inventario – Política (s, Q)")
 
 st.markdown("""
 Este simulador permite analizar el comportamiento del inventario de un producto 
@@ -21,7 +21,7 @@ Incluye:
 # -------------------------------------------------
 # SIDEBAR
 # -------------------------------------------------
-st.sidebar.header("⚙️ Parámetros del Modelo")
+st.sidebar.header("Parámetros del Modelo")
 
 dias = st.sidebar.slider("Días a simular", 15, 120, 60)
 I0 = st.sidebar.number_input("Inventario inicial", 0, 2000, 120)
@@ -75,11 +75,11 @@ if st.button("▶ Ejecutar simulación"):
     col1, col2 = st.columns(2)
 
     # Tabla
-    col1.subheader("📄 Tabla de resultados")
+    col1.subheader("Tabla de resultados")
     col1.dataframe(df)
 
     # Gráfica
-    col2.subheader("📉 Evolución del inventario")
+    col2.subheader("Evolución del inventario")
     
     chart = alt.Chart(df).mark_line(point=True).encode(
         x='Día',
@@ -89,7 +89,7 @@ if st.button("▶ Ejecutar simulación"):
 
     col2.altair_chart(chart, use_container_width=True)
 
-    st.subheader("📊 Faltantes por día")
+    st.subheader("Faltantes por día")
     falt_chart = alt.Chart(df).mark_bar().encode(
         x='Día',
         y='Faltantes'
@@ -99,7 +99,7 @@ if st.button("▶ Ejecutar simulación"):
     # -------------------------------------------------
     # ANÁLISIS AUTOMÁTICO
     # -------------------------------------------------
-    st.subheader("📌 Análisis automático")
+    st.subheader("Análisis automático")
     falt_total = df["Faltantes"].sum()
     falt_dias = sum(df["Faltantes"] > 0)
     pedidos = (df["Inventario"] <= s).sum()
@@ -114,7 +114,7 @@ if st.button("▶ Ejecutar simulación"):
     # COMPARACIÓN DE ESCENARIOS
     # -------------------------------------------------
     if escenarios:
-        st.subheader("📚 Comparación de Escenarios Automática")
+        st.subheader("Comparación de Escenarios Automática")
         escenarios_data = []
         for param in [demanda_media-3, demanda_media, demanda_media+3]:
             temp = simular_inventario(dias, I0, s, Q, L, param)
@@ -134,7 +134,7 @@ if st.button("▶ Ejecutar simulación"):
     # -------------------------------------------------
     # CONCLUSIONES AUTOMÁTICAS
     # -------------------------------------------------
-    st.subheader("📝 Conclusiones Generadas")
+    st.subheader("Conclusiones Generadas")
     concl = ""
 
     if falt_total == 0:
