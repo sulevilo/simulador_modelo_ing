@@ -84,7 +84,7 @@ if st.button("▶ Ejecutar simulación"):
     chart = alt.Chart(df).mark_line(point=True).encode(
         x='Día',
         y='Inventario',
-        tooltip=['Día', 'Inventario', 'Demand', 'Faltantes']
+        tooltip=['Día', 'Inventario', 'Demanda', 'Faltantes']
     ).interactive()
 
     col2.altair_chart(chart, use_container_width=True)
